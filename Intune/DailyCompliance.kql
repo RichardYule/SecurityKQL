@@ -1,0 +1,7 @@
+IntuneDevices
+| extend CheckIn = todatetime(LastContact)
+| where CheckIn >= ago(24h)
+| where CompliantState contains "Noncompliant"
+| summarize by DeviceName, Model, OS, TimeGenerated, SerialNumber, CompliantState, Manufacturer, StorageTotal, StorageFree
+| sort by DeviceName asc
+
